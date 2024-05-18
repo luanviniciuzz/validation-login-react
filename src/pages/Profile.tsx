@@ -1,13 +1,38 @@
-import Foto from '../assets/img/bitprof.png'
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import useHookUserData from '../services/useHookUserData';
+
+interface DataProps {
+  name: string;
+  email: string;
+  avatar: string;
+}
 
 export default function Profile() {
+
+  const [data, setData] = useState<DataProps>({
+    name: '',
+    email: '',
+    avatar: ''
+  })
 
   const navigate = useNavigate();
   function logout() {
     localStorage.removeItem('loggedUserToken');
     navigate('/');
   }
+
+  const { searchUserData, loading } = useHookUserData()
+  useEffect(() => {
+    const fetchData = async () => {
+    const token = localStorage.getItem('loggedUserToken');
+    const dataUser = await searchUserData(token);
+    if (dataUser) setData(data);
+  };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-white">
@@ -30,11 +55,17 @@ export default function Profile() {
       <div className="flex items-center justify-center h-screen bg-whitebackgroundprofile">
         <div className="bg-whitecardprofile md:w-[356px] h-min-[315px] shadow-[0_0_60px_0_rgba(0,0,0,0.25)] mx-auto p-8 rounded-3xl">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              className="mx-auto w-295 w-[56px] h-[56px] object-cover rounded-[8px]"
-              src={Foto}
-              alt="Your Company"
-            />
+            {loading ? (
+              <div className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-black"
+                role="status"
+              ></div>
+            ) : (
+              <img className="rounded-lg"
+                src={data.avatar ? data.avatar : ' '}
+                width={58}
+                alt="profile image"
+              />
+            )}
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
