@@ -1,5 +1,13 @@
 import Foto from '../assets/img/bitprof.png'
+import { useNavigate } from 'react-router-dom'
+
 export default function Profile() {
+
+  const navigate = useNavigate();
+  function logout() {
+    localStorage.removeItem('loggedUserToken');
+    navigate('/');
+  }
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-white">
@@ -10,6 +18,7 @@ export default function Profile() {
             <div className="flex items-center space-x-3">
                 {/* Conteúdo à direita, se houver */}
                 <button
+                    onClick={logout}
                     type="submit"
                     className="w-[272px] h-[44px] rounded-[6px] flex justify-center items-center bg-blueb2bit px-3 py-1.5 text-lg font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
