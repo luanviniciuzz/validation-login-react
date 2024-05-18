@@ -7,6 +7,7 @@ export default {
     extend: {
       colors: {
         background_placeholder: '#F1F1F1',
+        background_placeholder_profile: '#F4F4F4',
         outro: '#FAFAFA',
         white: '#FFFFFF',
         whitecardprofile: '#FDFDFD',
