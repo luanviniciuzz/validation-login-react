@@ -5,7 +5,7 @@ import useHookUserData from '../services/useHookUserData';
 interface DataProps {
   name: string;
   email: string;
-  avatar: string;
+  avatar: string | null;
 }
 
 export default function Profile() {
@@ -27,11 +27,11 @@ export default function Profile() {
     const fetchData = async () => {
     const token = localStorage.getItem('loggedUserToken');
     const dataUser = await searchUserData(token);
-    if (dataUser) setData(data);
+    if (dataUser) setData(dataUser);
   };
 
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, []);
   return (
     <>
@@ -42,10 +42,9 @@ export default function Profile() {
             </div>
             <div className="flex items-center space-x-3">
                 {/* Conteúdo à direita, se houver */}
-                <button
+                <button className="w-[272px] h-[44px] rounded-[6px] flex justify-center items-center bg-blueb2bit px-3 py-1.5 text-lg font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={logout}
                     type="submit"
-                    className="w-[272px] h-[44px] rounded-[6px] flex justify-center items-center bg-blueb2bit px-3 py-1.5 text-lg font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                     Logout
                 </button>
@@ -54,36 +53,33 @@ export default function Profile() {
       </nav>
       <div className="flex items-center justify-center h-screen bg-whitebackgroundprofile">
         <div className="bg-whitecardprofile md:w-[356px] h-min-[315px] shadow-[0_0_60px_0_rgba(0,0,0,0.25)] mx-auto p-8 rounded-3xl">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            {loading ? (
-              <div className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-black"
-                role="status"
-              ></div>
-            ) : (
-              <img className="rounded-lg"
-                src={data.avatar ? data.avatar : ' '}
-                width={58}
-                alt="profile image"
-              />
-            )}
-          </div>
+        <div className="flex flex-col justify-center items-center text-center">
+          <h1>Profile picture</h1>
 
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+          {loading ? (
+            <div
+              className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-black"
+              role="status"
+            ></div>
+          ) : (
+            <img
+              className="rounded-lg"
+              src={data.avatar ? data.avatar : ' '}
+              width={58}
+              alt="profile image"
+            />
+          )}
+        </div>
+
+        <div className="space-y-6"> 
               <div>
                 <label htmlFor="email" className="text-lg block font-bold font-body leading-6 text-black">
                   Your Name
                 </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    placeholder='@gmail.com'
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    className="bg-background_placeholder block w-full h-[54px] rounded-[9px] border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-background_placeholder placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellowb2bit sm:text-sm sm:leading-6"
-                  />
+                <div className="bg-background_placeholder block w-full h-[54px] rounded-[9px] border-0 py-1.5 text-gray-900 flex items-center px-5">
+                  <p>
+                    {loading ? 'carregando...' : data.name}
+                  </p>
                 </div>
               </div>
 
@@ -93,19 +89,14 @@ export default function Profile() {
                     Your E-mail
                   </label>
                 </div>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    placeholder='**********'
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="bg-background_placeholder block w-full h-[54px] rounded-[9px] border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-background_placeholder placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellowb2bit sm:text-sm sm:leading-6"
-                  />
+                
+                <div className="bg-background_placeholder block w-full h-[54px] rounded-[9px] border-0 py-1.5 text-gray-900 flex items-center px-5">
+                  <p>
+                    {loading ? 'carregando...' : data.email}
+                  </p>
                 </div>
+                
               </div>
-            </form>
           </div>
         </div>
       </div>

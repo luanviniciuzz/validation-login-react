@@ -83,6 +83,7 @@ const useHookUserData = () => {
 
       const userData: UserDataProps = await response.data;
       return userData;
+      
     } catch (error) {
      
     } finally {
