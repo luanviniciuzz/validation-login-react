@@ -82,7 +82,7 @@ export default function Profile() {
             <img
               className="rounded-lg w-[56px] h-[56px]"
               src={data.avatar ? data.avatar.high : ''}
-              alt="profile image"
+              alt="avatar image"
             />
           )}
         </div>
@@ -93,7 +93,7 @@ export default function Profile() {
                   Your Name
                 </label>
                 <div className="bg-background_placeholder block w-full h-[54px] rounded-[9px] border-0 py-1.5 text-gray-900 flex items-center px-5">
-                  <p>
+                  <p data-testid="name">
                     {loading ? 'carregando...' : data.name}
                   </p>
                 </div>
@@ -107,7 +107,7 @@ export default function Profile() {
                 </div>
                 
                 <div className="bg-background_placeholder block w-full h-[54px] rounded-[9px] border-0 py-1.5 text-gray-900 flex items-center px-5">
-                  <p>
+                  <p data-testid="email">
                     {loading ? 'carregando...' : data.email}
                   </p>
                 </div>
