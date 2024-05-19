@@ -73,7 +73,7 @@ const useHookUserData = () => {
   };
   const reloadLogin = (token: string | null) => {
     if (token) {
-      navigate('/profile');
+      navigate('/validation-login-react/profile');
     }
   };
 
@@ -81,7 +81,7 @@ const useHookUserData = () => {
     try {
       setLoading(true);
       if (!token) {
-        navigate('/');
+        navigate('/validation-login-react/');
         return null;
       }
 

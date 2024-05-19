@@ -29,7 +29,7 @@ export default function Profile() {
   const navigate = useNavigate();
   function logout() {
     localStorage.removeItem('loggedUserToken');
-    navigate('/');
+    navigate('/validation-login-react/');
   }
 
   const { searchUserData, loading } = useHookUserData()
