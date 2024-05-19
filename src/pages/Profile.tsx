@@ -83,7 +83,6 @@ export default function Profile() {
             <img
               className="rounded-lg w-[56px] h-[56px]"
               src={data.avatar ? data.avatar.high : ''}
-              width={58}
               alt="profile image"
             />
           )}
