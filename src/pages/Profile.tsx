@@ -5,7 +5,12 @@ import useHookUserData from '../services/useHookUserData';
 interface DataProps {
   name: string;
   email: string;
-  avatar: string | null;
+  avatar: {
+    id: string;
+    high: string
+    medium: string;
+    low: string;
+  } | null;
 }
 
 export default function Profile() {
@@ -13,7 +18,12 @@ export default function Profile() {
   const [data, setData] = useState<DataProps>({
     name: '',
     email: '',
-    avatar: ''
+    avatar: {
+      id: '',
+      high: '',
+      medium: '',
+      low: ''
+    }
   })
 
   const navigate = useNavigate();
@@ -27,7 +37,14 @@ export default function Profile() {
     const fetchData = async () => {
     const token = localStorage.getItem('loggedUserToken');
     const dataUser = await searchUserData(token);
-    if (dataUser) setData(dataUser);
+    if (dataUser){
+      console.log(dataUser)
+      setData({
+        name: dataUser.name,
+        email: dataUser.email,
+        avatar: dataUser.avatar, 
+      });
+    };
   };
 
     fetchData();
@@ -54,8 +71,9 @@ export default function Profile() {
       <div className="flex items-center justify-center h-screen bg-whitebackgroundprofile">
         <div className="bg-whitecardprofile md:w-[356px] h-min-[315px] shadow-[0_0_60px_0_rgba(0,0,0,0.25)] mx-auto p-8 rounded-3xl">
         <div className="flex flex-col justify-center items-center text-center">
-          <h1>Profile picture</h1>
-
+          <h1 className="text-lg block font-bold font-body leading-6 text-black">
+            Profile picture
+          </h1>
           {loading ? (
             <div
               className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-black"
@@ -63,8 +81,8 @@ export default function Profile() {
             ></div>
           ) : (
             <img
-              className="rounded-lg"
-              src={data.avatar ? data.avatar : ' '}
+              className="rounded-lg w-[56px] h-[56px]"
+              src={data.avatar ? data.avatar.high : ''}
               width={58}
               alt="profile image"
             />

@@ -16,14 +16,24 @@ interface Props {
     type: string;
     name: string;
     email: string;
-    avatar: string | null;
+    avatar:  {
+      id: string,
+      high: string,
+      medium: string,
+      low: string
+    }
   };
 }
 
 interface UserDataProps {
   name: string;
   email: string;
-  avatar: string | null;
+  avatar:  {
+    id: string,
+    high: string,
+    medium: string,
+    low: string
+  }
 }
 
 const useHookUserData = () => {
