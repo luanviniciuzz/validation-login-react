@@ -13,7 +13,7 @@ export default function Login() {
       .required('Required'),
   });
 
-  const { login, reloadLogin, loading } = useHookUserData();
+  const { login, reloadLogin, loading, errorLogin } = useHookUserData();
 
   useEffect(() => {
 
@@ -92,7 +92,12 @@ export default function Login() {
                     onBlur={() => setTouched({ ...touched, password: true })}
                   />
                 </div>
-
+                  {errorLogin ? (
+                    <div className="text-error font-body text-center font-bold">
+                    Invalid password or email
+                  </div>
+                  ) : <></> }
+                
                 <button className="bg-blueb2bit text-white font-body rounded-lg mt-5 flex items-center justify-center gap-5 h-14 hover:bg-blue-700 transition-all"
                   type="submit"
                   disabled={loading}

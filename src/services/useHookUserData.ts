@@ -38,6 +38,7 @@ interface UserDataProps {
 
 const useHookUserData = () => {
   const [loading, setLoading] = useState(false);
+  const [errorLogin, setErrorLogin] = useState(false)
   const navigate = useNavigate();
 
   const login = async (email: string, password: string) => {
@@ -62,7 +63,10 @@ const useHookUserData = () => {
       localStorage.setItem('loggedUserToken', loggedUserToken);
 
     } catch (error) {
-     
+      setErrorLogin(true)
+      setTimeout(()=>{
+        setErrorLogin(false)
+      }, 2000)
     } finally {
       setLoading(false);
     }
@@ -101,7 +105,7 @@ const useHookUserData = () => {
     }
   };
 
-  return { searchUserData, loading, login, reloadLogin };
+  return { searchUserData, loading, login, reloadLogin, errorLogin };
 };
 
 export default useHookUserData;

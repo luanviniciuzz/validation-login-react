@@ -38,7 +38,6 @@ export default function Profile() {
     const token = localStorage.getItem('loggedUserToken');
     const dataUser = await searchUserData(token);
     if (dataUser){
-      console.log(dataUser)
       setData({
         name: dataUser.name,
         email: dataUser.email,
