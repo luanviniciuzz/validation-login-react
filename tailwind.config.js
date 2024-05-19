@@ -13,8 +13,13 @@ export default {
         whitecardprofile: '#FDFDFD',
         whitebackgroundprofile: '#F1F5F9',
         blueb2bit: '#02274F',
+        bluehover: '#034388',
         yellowb2bit: '#FDCF00',
+        error: '#e74c3c',
         black:'#262626',
+      },
+      fontWeight: {
+        bold: '700',
       },
       fontFamily:{
         body:['Nunito']
