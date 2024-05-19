@@ -7,15 +7,15 @@ import Login from './pages/Login.tsx';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/validation-login-react/',
     element: <App />,
     children: [
       {
-        path: '/',
+        path: '/validation-login-react/',
         element: <Login />,
       },
       {
-        path: '/profile',
+        path: '/validation-login-react/profile',
         element: <Profile />,
       },
     ],
